@@ -46,11 +46,11 @@ class PostList(generics.ListCreateAPIView):
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
 
-            """
-            class PostDetail(APIView):
-                permission_classes = [IsOwnerOrReadOnly]
-                serializer_class = PostSerializer
-                """
+"""
+class PostDetail(APIView):
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = PostSerializer
+    """
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve a post and edit or delete it if you own it.

@@ -8,19 +8,19 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from rest_framework import generics
 
 
+"""
+class ProfileList(APIView):
+    ""
+    List all profiles
+    No Create view (post method), as profile creation handled by django signals
+    ""
+    def get(self, request):
+        profiles = Profile.objects.all()
+        serializer = ProfileSerializer(
+            profiles, many=True, context={'request': request}
+        )
+        return Response(serializer.data)
         """
-        class ProfileList(APIView):
-            ""
-            List all profiles
-            No Create view (post method), as profile creation handled by django signals
-            ""
-            def get(self, request):
-                profiles = Profile.objects.all()
-                serializer = ProfileSerializer(
-                    profiles, many=True, context={'request': request}
-                )
-                return Response(serializer.data)
-                """
 class ProfileList(generics.ListAPIView):
     """
     List all profiles.
@@ -29,11 +29,11 @@ class ProfileList(generics.ListAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
-        """
-        class ProfileDetail(APIView):
-            serializer_class = ProfileSerializer
-            permission_classes = [IsOwnerOrReadOnly]
-            """
+"""
+class ProfileDetail(APIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    """
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
     Retrieve or update a profile if you're the owner.
