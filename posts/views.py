@@ -5,14 +5,27 @@ from rest_framework.views import APIView
 from .models import Post
 from .serializers import PostSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
+from rest_framework import generics
 
-
+"""
 class PostList(APIView):
     serializer_class = PostSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
-    ]
+    ]"""
 
+class PostList(generics.ListCreateAPIView):
+    """
+    List posts or create a post if logged in
+    The perform_create method associates the post with the logged in user.
+    """
+    serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Post.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+        
     def get(self, request):
         posts = Post.objects.all()
         serializer = PostSerializer(
@@ -33,10 +46,18 @@ class PostList(APIView):
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
 
-
-class PostDetail(APIView):
-    permission_classes = [IsOwnerOrReadOnly]
+            """
+            class PostDetail(APIView):
+                permission_classes = [IsOwnerOrReadOnly]
+                serializer_class = PostSerializer
+                """
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve a post and edit or delete it if you own it.
+    """
     serializer_class = PostSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Post.objects.all()
 
     def get_object(self, pk):
         try:
