@@ -115,7 +115,7 @@ else:
 
 ROOT_URLCONF = 'drf_api.urls'
 
- CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {
