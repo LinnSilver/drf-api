@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 import re
+import dj_database_url
 
 if os.path.exists('env.py'):
     import env
@@ -65,7 +65,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 # ALLOWED_HOSTS = ['localhost', 'django-drf-api-i.herokuapp.com']
-ALLOWED_HOSTS = ['localhost', '8000-linnsilver-drfapi-hh9cjyfwa4p.ws-eu99.gitpod.io', os.environ.get('ALLOWED_HOST'),]
+ALLOWED_HOSTS = ['localhost', '8000-linnsilver-drfapi-hh9cjyfwa4p.ws-eu100.gitpod.io', os.environ.get('ALLOWED_HOST'),]
 
 
 # Application definition
